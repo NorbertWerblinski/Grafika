@@ -71,91 +71,54 @@ plane{ <0,1,0>, 0
 //--------------------------------------------------------------------------
 //---------------------------- objects in scene ----------------------------
 //--------------------------------------------------------------------------
-
-#declare os=
-union{
-union{
-union{
-object{ Supertorus( .5, 0.05, // Radius_Major, Radius_Minor, 
-                    1.00, 0.45, // Major_Control, Minor_Control,
-                   0.001, 1.50) // Accuracy, Max_Gradient)
-        
-        texture{ pigment{ color rgb<1,1,1>}
-                 finish { phong 1 } 
-               } // end of texture
-        scale <1,1,1> 
-        rotate<90,0,0> 
-
-        
-      } //----------------------------------------------------    
-cylinder { <0,0,0>,<0,0,.05>,0.1 
-           texture { pigment { color rgb<.0,.0,.0>}
-                   //normal  { bumps 0.5 scale 0.005}  
-                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+#declare kolo=union{
+    object{ Supertorus( .5, 0.05, // Radius_Major, Radius_Minor,                       //obrecz
+                        1.00, 0.45, // Major_Control, Minor_Control,
+                       0.001, 1.50) // Accuracy, Max_Gradient)
+            
+            texture{ pigment{ color rgb<.8,.4,.2>}
+                     finish { phong 1 } 
                    } // end of texture
-           scale <1,1,1> rotate<0,0,0> translate<0,0,-0.025>
-         } // end of cylinder  ------------------------------------  
-
-#for (i,0, 360, 15)
-        
-cylinder { <0,0,0>,<0,.5,0>, 0.02 
-
-           texture { pigment { color rgb<1,0,0> }
-                   //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
-                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
-                   } // end of texture
-
-           scale <1,1,1> rotate<0,0,i> translate<0,0,-0.005>
-} // end of cylinder -------------------------------------            
-#end     
+            scale <1,1,1> 
+            rotate<90,0,0> 
+    
+            
+          } //----------------------------------------------------    
+    cylinder { <0,0,0>,<0,0,.05>,0.1                                                         //piasta
+               texture { pigment { color rgb<.0,.0,.0>}
+                       //normal  { bumps 0.5 scale 0.005}  
+                         finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                       } // end of texture
+               scale <1,1,1> rotate<0,0,0> translate<0,0,-0.025>
+             } // end of cylinder  ------------------------------------  
+                                                                                                //szprychy
+    #for (i,0, 360, 15)
+            
+    cylinder { <0,0,0>,<0,.5,0>, 0.02 
+    
+               texture { pigment { color rgb<1,0,0> }
+                       //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
+                         finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                       } // end of texture
+    
+               scale <1,1,1> rotate<0,0,i> translate<0,0,-0.005>
+    } // end of cylinder -------------------------------------            
+    #end     
 }    
 
-union{
-object{ Supertorus( .5, 0.05, // Radius_Major, Radius_Minor, 
-                    1.00, 0.45, // Major_Control, Minor_Control,
-                   0.001, 1.50) // Accuracy, Max_Gradient)
-        
-        texture{ pigment{ color rgb<1,1,1>}
-                 finish { phong 1 } 
-               } // end of texture
-        scale <1,1,1> 
-        rotate<90,0,0> 
-
-        
-      } //----------------------------------------------------    
-cylinder { <0,0,0>,<0,0,.05>,0.1 
-           texture { pigment { color rgb<0,0,0>}
-                   //normal  { bumps 0.5 scale 0.005}  
-                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
-                   } // end of texture
-           scale <1,1,1> rotate<0,0,0> translate<0,0,-0.025>
-         } // end of cylinder  ------------------------------------  
-
-#for (i,0, 360, 15)
-        
-cylinder { <0,0,0>,<0,.5,0>, 0.02 
-
-           texture { pigment { color rgb<1,0,0> }
-                   //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
-                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
-                   } // end of texture
-
-           scale <1,1,1> rotate<0,0,i> translate<0,0,-0.005>
-} // end of cylinder -------------------------------------            
-#end  
-translate<0,0,-1>   
-}   
-
-cylinder { <0,0,0>,<0,0,-1>,0.05 
-           texture { pigment { color rgb<0,0,0>}
-                   //normal  { bumps 0.5 scale 0.005}  
-                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
-                   } // end of texture
-           scale <1,1,1> rotate<0,0,0> translate<0,0,0>
-         } // end of cylinder  ------------------------------------
+#declare os= union{
+    object{kolo translate<0,0,-1>} 
+    object{kolo}
+    cylinder { <0,0,0>,<0,0,-1>,0.05 
+               texture { pigment { color rgb<0,0,0>}
+                       //normal  { bumps 0.5 scale 0.005}  
+                         finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                       } // end of texture
+               scale <1,1,1> rotate<0,0,0> translate<0,0,0>
+             } // end of cylinder  ------------------------------------
                       
 }
-}   
+  
 #declare osie=union{
 object{os}    
 object{os
