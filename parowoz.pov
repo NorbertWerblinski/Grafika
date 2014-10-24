@@ -158,7 +158,7 @@ scale <.5,.5,.5> translate<0,.25,0>}
                                                            
                                                            
 //----------------------------------------------------------------                                                                                                                        
-//------------Male zlote cos miedzy przednimi kolami-------------- 
+//----------------------cos miedzy przednimi kolami--------------- 
 //----------------------------------------------------------------   
 #declare silownikMaly=union{
     object{
@@ -170,7 +170,7 @@ scale <.5,.5,.5> translate<0,.25,0>}
             } // end of cylinder  ------------------------------------     
 
     }  
-    box { <-.05, 0.00, -.05>,< .05, .1, .05>   
+    box { <-.05, 0.00, -.05>,< .05, .15, .05>   
 
       texture { pigment{ kolorZloty}  
                 finish { phong 1 reflection{ 0.00 metallic 0.00} } 
@@ -180,7 +180,36 @@ scale <.5,.5,.5> translate<0,.25,0>}
     } // end of box --------------------------------------
     
        
-}       
+}
+box { <-.9,0,-0.05>,< -1.05, 0.4, -.45>   
+
+      texture { pigment{Black}
+                finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+              } // end of texture
+
+      scale <1,1,1> rotate<0,0,0> translate<0,.15,0> 
+    } // end of box -------------------------------------- 
+difference {
+    box { <-.6,0,-0.00>,< -1.45, 0.05, -.5>   
+    
+          texture { pigment{White}
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.25,0> 
+        } // end of box --------------------------------------  
+}   
+cylinder { <0,0,0>,<0,.5,0>, 0.2 
+
+           texture { pigment { color rgb<1,0,0> }
+                   //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+
+           scale <1,1,1> rotate<0,0,0> translate<-1,0,0>
+         } // end of cylinder -------------------------------------
+
+      
 object{silownikMaly translate<-.92,.15,-.5>}   
 object{silownikMaly translate<-.92,.15,0>}   
 
@@ -303,9 +332,13 @@ object{dach}
 
 
 //----------------------------------------------------------------                                                                                                                        
-//-----------------------Koooooooniec-----------------------------     
+//-----------------------Koooooooniec-----------------------------   
+//---------------------------------------------------------------- 
+   
+}    
+//----------------------------------------------------------------   
 //-----------------------Prezentacja------------------------------ 
-//----------------------------------------------------------------    
-}
+//---------------------------------------------------------------- 
+
 //object{lokomotywa rotate y*360*clock}       
 object{lokomotywa translate<0,0,.22>}
