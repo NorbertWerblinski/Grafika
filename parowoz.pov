@@ -1,11 +1,5 @@
 #include "colors.inc"
        
-       
-// komentarze dodawane w stylu jêzyka C++
-// do ka¿dego obiektu mo¿na u¿yæ: translate, rotate, scale
-// PoVRay 3.7 Scene File " ... .pov"
-// author:  ...
-// date:    ...
 //--------------------------------------------------------------------------
 #version 3.7;
 global_settings{ assumed_gamma 1.0 }
@@ -26,7 +20,7 @@ global_settings{ assumed_gamma 1.0 }
 //--------------------------------------------------------------------------
 // camera ------------------------------------------------------------------
 #declare Camera_0 = camera {/*ultra_wide_angle*/ angle 75      // front view
-                            location  <0.0 , 1.0 ,-3.0>
+                            location  <-1.2 , 1.2 ,-2.0>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
 #declare Camera_1 = camera {/*ultra_wide_angle*/ angle 90   // diagonal view
@@ -38,7 +32,7 @@ global_settings{ assumed_gamma 1.0 }
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
 #declare Camera_3 = camera {/*ultra_wide_angle*/ angle 90        // top view
-                            location  <0.0 , 3.0 ,-0.001>
+                            location  <0 , 3.0 ,0>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>} 
 #declare Camera_5 = camera {/*ultra_wide_angle*/ angle 90 // lewo
@@ -181,7 +175,7 @@ scale <.5,.5,.5> translate<0,.25,0>}
     
        
 }
-box { <-.9,0,-0.05>,< -1.05, 0.4, -.45>   
+box { <-.92,0,-0.05>,< -1.08, 0.4, -.45>   
 
       texture { pigment{Black}
                 finish { phong 1 reflection{ 0.00 metallic 0.00} } 
@@ -190,24 +184,51 @@ box { <-.9,0,-0.05>,< -1.05, 0.4, -.45>
       scale <1,1,1> rotate<0,0,0> translate<0,.15,0> 
     } // end of box -------------------------------------- 
 difference {
-    box { <-.6,0,-0.00>,< -1.45, 0.05, -.5>   
+    box { <-.6,0,-0.00>,< -1.4, 0.05, -.5>   
     
-          texture { pigment{White}
+          texture { pigment{kolorZloty}
                     finish { phong 1 reflection{ 0.00 metallic 0.00} } 
                   } // end of texture
     
-          scale <1,1,1> rotate<0,0,0> translate<0,.25,0> 
-        } // end of box --------------------------------------  
+          scale <1,1,1> rotate<0,0,0> translate<0,.28,0> 
+        } // end of box --------------------------------------     
+    cylinder { <0,0,0>,<0,.5,0>, 0.2 
+    
+               texture { pigment { kolorZloty}
+                       //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
+                         finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                       } // end of texture
+    
+               scale <1,1,1> rotate<0,0,0> translate<-1.1,0,.1>
+             } // end of cylinder -------------------------------------   
+    box { <-.5,0,-0.00>,< -1.1, 1, -.1>   
+        
+              texture { pigment{kolorZloty}
+                        finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                      } // end of texture
+        
+              scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
+            } // end of box --------------------------------------  
+     cylinder { <0,0,-.6>,<0,.5,-.6>, 0.2 
+    
+               texture { pigment {kolorZloty }
+                       //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
+                         finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                       } // end of texture
+    
+               scale <1,1,1> rotate<0,0,0> translate<-1.1,0,0>
+             } // end of cylinder -------------------------------------   
+    box { <-.5,0,-0.6>,< -1.1, 1, -.4>   
+        
+              texture { pigment{kolorZloty}
+                        finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                      } // end of texture
+        
+              scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
+            } // end of box --------------------------------------         
 }   
-cylinder { <0,0,0>,<0,.5,0>, 0.2 
 
-           texture { pigment { color rgb<1,0,0> }
-                   //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
-                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
-                   } // end of texture
-
-           scale <1,1,1> rotate<0,0,0> translate<-1,0,0>
-         } // end of cylinder -------------------------------------
+        
 
       
 object{silownikMaly translate<-.92,.15,-.5>}   
