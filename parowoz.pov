@@ -40,6 +40,18 @@ global_settings{ assumed_gamma 1.0 }
 #declare Camera_3 = camera {/*ultra_wide_angle*/ angle 90        // top view
                             location  <0.0 , 3.0 ,-0.001>
                             right     x*image_width/image_height
+                            look_at   <0.0 , 1.0 , 0.0>} 
+#declare Camera_5 = camera {/*ultra_wide_angle*/ angle 90 // lewo
+                            location  <-3.0 , 1.0 , 0.0>
+                            right     x*image_width/image_height
+                            look_at   <0.0 , 1.0 , 0.0>} 
+#declare Camera_6 = camera {/*ultra_wide_angle*/ angle 75      //tyl
+                            location  <0.0 , 1.0 ,3.0>
+                            right     x*image_width/image_height
+                            look_at   <0.0 , 1.0 , 0.0>}   
+#declare Camera_7 = camera {/*ultra_wide_angle*/ angle 90   // diagonal view
+                            location  <-2.0 , 2.5 ,3.0>
+                            right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
 camera{Camera_0}
 // sun ---------------------------------------------------------------------
@@ -137,9 +149,9 @@ object{os
 translate<-5,-.5,0>
 scale <.5,.5,0>}  
 object{os
-translate<.5,0,0>} 
+translate<0.5,0,0>} 
 object{os
-translate<2.5,0,0>}     }
+translate<2.2,0,0>}     }
 
 object {osie
 scale <.5,.5,.5> translate<0,.25,0>} 
@@ -180,22 +192,120 @@ cylinder { <-.9,0,0>,<1.1,0,0>, 0.220
                    //normal  { bumps 0.5 scale <0.25, 0.005,0.005>}  
                      finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
                    } // end of texture
-           scale <1,1,1> rotate<0,0,0> translate<0,.5,-.24>
+           scale <1,1,1> rotate<0,0,0> translate<0,.6,-.24>
 } // end of cylinder  ------------------------------------
 cylinder { <-.9,0,0>,<-1.1,0,0>, 0.220
            texture { pigment { Black}
                    //normal  { bumps 0.5 scale <0.25, 0.005,0.005>}  
                      finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
                    } // end of texture
-           scale <1,1,1> rotate<0,0,0> translate<0,.5,-.24>
+           scale <1,1,1> rotate<0,0,0> translate<0,.6,-.24>
 } // end of cylinder  ------------------------------------ 
+//----------------------------------------------------------------                                                                                                                        
+//-------------------------Pomost--------------------------------- 
+//----------------------------------------------------------------      
+box { <-.7, 0.00, -.5>,< 1.6, .015, 0>   
+
+      texture { pigment{ kolorZielony}  
+                finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+              } // end of texture
+
+      scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------
+//----------------------------------------------------------------                                                                                                                        
+//-------------------------Kabina--------------------------------- 
+//----------------------------------------------------------------    
+#declare bokKabiny=// CSG difference, subtract intersections of shapes 2...N from Shape1
+    difference {
+    box { <1, 0.5, .015>,< 1.6, .0, 0>   
     
+          texture { pigment{kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
     
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------
+    box { <1.35, 0.45, .02>,< 1.55, .2, -.005>   
     
+          texture { pigment{ kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------
+    box { <1.05, 0.45, .02>,< 1.25, .2, -.005>   
+    
+          texture { pigment{ kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------
+}   
+#declare przodKabiny=// CSG difference, subtract intersections of shapes 2...N from Shape1
+    difference {  
+    box { <1.0, 0.5, -.5>,< 1.15, .0, 0>   
+    
+          texture { pigment{ kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------
+    box { <.95, 0.45, -.48>,< 1.2, .05, -.4>   
+    
+          texture { pigment{ kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------    
+    box { <.95, 0.45, -.10>,< 1.2, .05, -.02>   
+    
+          texture { pigment{ kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------   
+        box { <.95, 0.45, -.38>,< 1.2, .35, -.28>   
+    
+          texture { pigment{ kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------    
+    box { <.95, 0.45, -.22>,< 1.2, .35, -.12>   
+    
+          texture { pigment{ kolorZielony}  
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------
+}  
+#declare dach=box { <1, .5, -.5>,< 1.6, .52, 0>   
+
+      texture { pigment{kolorZielony}  
+                finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+              } // end of texture
+
+      scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
+    } // end of box --------------------------------------
+object{bokKabiny}
+object{bokKabiny translate<0,0,-.5> } 
+object{przodKabiny}  
+object{dach}       
+
+
+
+
+
 //----------------------------------------------------------------                                                                                                                        
 //-----------------------Koooooooniec-----------------------------     
 //-----------------------Prezentacja------------------------------ 
 //----------------------------------------------------------------    
 }
 //object{lokomotywa rotate y*360*clock}       
-object{lokomotywa}
+object{lokomotywa translate<0,0,.22>}
