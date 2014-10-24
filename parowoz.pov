@@ -120,13 +120,16 @@ plane{ <0,1,0>, 0
 }
   
 #declare osie=union{
-object{os}    
+object{os   
+translate<-3,-.5,0>
+scale <.5,.5,0>}    
 object{os
-translate<-1.5,0,0>}  
+translate<-5,-.5,0>
+scale <.5,.5,0>}  
 object{os
-translate<1.5,0,0>} 
+translate<.5,0,0>} 
 object{os
-translate<3,0,0>}     }
+translate<2.5,0,0>}     }
 
 object {osie
-scale <.5,.5,.5> translate<0,.25,0>}
+scale <.5,.5,.5> translate<0,.25,0> rotate y*360*clock}
