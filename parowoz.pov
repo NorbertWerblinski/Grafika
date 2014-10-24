@@ -69,14 +69,24 @@ plane{ <0,1,0>, 0
               } // end of texture
      } // end of plane           
 //--------------------------------------------------------------------------
-//---------------------------- objects in scene ----------------------------
+//---------------------------- Deklaracje------ ----------------------------
 //--------------------------------------------------------------------------
+#declare kolorZloty= rgb<.8,.4,.2> ;  
+#declare kolorZielony=rgb<51/255,79/255,65/255>;
+//--------------------------------------------------------------------------
+//---------------------------- Lokomotywa ----------------------------------
+//--------------------------------------------------------------------------
+
+#declare lokomotywa=union{
+//----------------------------------------------------------------                                                                                                                        
+//---------------------------OSIE---------------------------------
+//----------------------------------------------------------------       
 #declare kolo=union{
     object{ Supertorus( .5, 0.05, // Radius_Major, Radius_Minor,                       //obrecz
                         1.00, 0.45, // Major_Control, Minor_Control,
                        0.001, 1.50) // Accuracy, Max_Gradient)
             
-            texture{ pigment{ color rgb<.8,.4,.2>}
+            texture{ pigment{kolorZloty}
                      finish { phong 1 } 
                    } // end of texture
             scale <1,1,1> 
@@ -85,7 +95,7 @@ plane{ <0,1,0>, 0
             
           } //----------------------------------------------------    
     cylinder { <0,0,0>,<0,0,.05>,0.1                                                         //piasta
-               texture { pigment { color rgb<.0,.0,.0>}
+               texture { pigment { kolorZloty}
                        //normal  { bumps 0.5 scale 0.005}  
                          finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
                        } // end of texture
@@ -96,7 +106,7 @@ plane{ <0,1,0>, 0
             
     cylinder { <0,0,0>,<0,.5,0>, 0.02 
     
-               texture { pigment { color rgb<1,0,0> }
+               texture { pigment { Red }
                        //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
                          finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
                        } // end of texture
@@ -110,7 +120,7 @@ plane{ <0,1,0>, 0
     object{kolo translate<0,0,-1>} 
     object{kolo}
     cylinder { <0,0,0>,<0,0,-1>,0.05 
-               texture { pigment { color rgb<0,0,0>}
+               texture { pigment { Black}
                        //normal  { bumps 0.5 scale 0.005}  
                          finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
                        } // end of texture
@@ -132,4 +142,60 @@ object{os
 translate<2.5,0,0>}     }
 
 object {osie
-scale <.5,.5,.5> translate<0,.25,0> rotate y*360*clock}
+scale <.5,.5,.5> translate<0,.25,0>} 
+                                                           
+                                                           
+//----------------------------------------------------------------                                                                                                                        
+//------------Male zlote cos miedzy przednimi kolami-------------- 
+//----------------------------------------------------------------   
+#declare silownikMaly=union{
+    object{
+            cylinder { <-.15,0,0>,<0,0,0>, 0.06
+                       texture { pigment { kolorZloty}
+                                 finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                               } // end of texture
+                       scale <1,1,1> rotate<0,0,0> 
+            } // end of cylinder  ------------------------------------     
+
+    }  
+    box { <-.05, 0.00, -.05>,< .05, .1, .05>   
+
+      texture { pigment{ kolorZloty}  
+                finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+              } // end of texture
+
+      scale <1,1,1> rotate<0,0,0> translate<0,0,0> translate<-.08,.03,0> 
+    } // end of box --------------------------------------
+    
+       
+}       
+object{silownikMaly translate<-.92,.15,-.5>}   
+object{silownikMaly translate<-.92,.15,0>}   
+
+//----------------------------------------------------------------                                                                                                                        
+//-------------------------Silnik--------------------------------- 
+//----------------------------------------------------------------  
+cylinder { <-.9,0,0>,<1.1,0,0>, 0.220
+           texture { pigment { kolorZielony}
+                   //normal  { bumps 0.5 scale <0.25, 0.005,0.005>}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,0,0> translate<0,.5,-.24>
+} // end of cylinder  ------------------------------------
+cylinder { <-.9,0,0>,<-1.1,0,0>, 0.220
+           texture { pigment { Black}
+                   //normal  { bumps 0.5 scale <0.25, 0.005,0.005>}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,0,0> translate<0,.5,-.24>
+} // end of cylinder  ------------------------------------ 
+    
+    
+    
+//----------------------------------------------------------------                                                                                                                        
+//-----------------------Koooooooniec-----------------------------     
+//-----------------------Prezentacja------------------------------ 
+//----------------------------------------------------------------    
+}
+//object{lokomotywa rotate y*360*clock}       
+object{lokomotywa}
