@@ -28,7 +28,7 @@ global_settings{ assumed_gamma 1.0 }
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
 #declare Camera_2 = camera {/*ultra_wide_angle*/ angle 90 // right side view
-                            location  <3.0 , 1.0 , 0.0>
+                            location  <3.0 , 1.0 , 0>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
 #declare Camera_3 = camera {/*ultra_wide_angle*/ angle 90        // top view
@@ -236,12 +236,61 @@ box { <-.6,.1,-0.1>,< -1.3, 0.3, -.4>
     
           scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
         } // end of box --------------------------------------     
-        
-
-      
+             
 object{silownikMaly translate<-.92,.15,-.5>}   
 object{silownikMaly translate<-.92,.15,0>}   
+//----------------------------------------------------------------                                                                                                                        
+//---------------------------Plug--------------------------------- 
+//---------------------------------------------------------------- 
 
+cylinder { <0,0,0>,<0,0,-.5>,0.02 
+           texture { pigment { kolorZloty}
+                   //normal  { bumps 0.5 scale 0.005}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,0,0> translate<-1.4,.3,0>
+         } // end of cylinder  ------------------------------------
+cylinder { <0,0,.03>,<0,0,-.5>,0.02 
+           texture { pigment { kolorZloty}
+                   //normal  { bumps 0.5 scale 0.005}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,45,0> translate<-1.4,0.05,.1>
+         } // end of cylinder  ------------------------------------
+cylinder { <0,0,-.5>,<0,0,.03>,0.02 
+           texture { pigment { kolorZloty}
+                   //normal  { bumps 0.5 scale 0.005}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,135,0> translate<-1.4,0.05,-.6>  
+         } // end of cylinder  ------------------------------------ 
+
+#for (i,0,4)
+cylinder { <0,.3,-.25*i/5>,<-.35*i/5,.05,.1-.35*i/5>,0.02 
+           texture { pigment { kolorZloty}
+                   //normal  { bumps 0.5 scale 0.005}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,0,0> translate<-1.4,0,0>  
+         } // end of cylinder  ------------------------------------ 
+#end 
+cylinder { <0,.3,-.25>,<-.35,.05,-.25>,0.02 
+           texture { pigment { kolorZloty}
+                   //normal  { bumps 0.5 scale 0.005}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,0,0> translate<-1.4,0,0>  
+         } // end of cylinder  ------------------------------------ 
+
+#for (i,0,4)
+cylinder { <0,.3,-.5+.25*i/5>,<-.35*i/5,.05,-.6+.35*i/5>,0.02 
+           texture { pigment { kolorZloty}
+                   //normal  { bumps 0.5 scale 0.005}  
+                     finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
+                   } // end of texture
+           scale <1,1,1> rotate<0,0,0> translate<-1.4,0,0>  
+         } // end of cylinder  ------------------------------------ 
+#end  
 //----------------------------------------------------------------                                                                                                                        
 //-------------------------Silnik--------------------------------- 
 //----------------------------------------------------------------  
@@ -262,6 +311,7 @@ cylinder { <-.9,0,0>,<-1.1,0,0>, 0.220
 //----------------------------------------------------------------                                                                                                                        
 //-------------------------Pomost--------------------------------- 
 //----------------------------------------------------------------      
+difference{
 box { <-.7, 0.00, -.55>,< 1.6, .015, .05>   
 
       texture { pigment{ kolorZielony}  
@@ -269,7 +319,16 @@ box { <-.7, 0.00, -.55>,< 1.6, .015, .05>
               } // end of texture
 
       scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
-    } // end of box --------------------------------------
+    } 
+box { <1,.3,-0.10>,< 1.7, 0.7, -0.40>   
+    
+          texture { pigment{kolorZielony}
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
+}  
+}
 //----------------------------------------------------------------                                                                                                                        
 //-------------------------Kabina--------------------------------- 
 //----------------------------------------------------------------    
@@ -354,18 +413,49 @@ box { <-.7, 0.00, -.55>,< 1.6, .015, .05>
 object{bokKabiny translate<0,0,.05>}
 object{bokKabiny translate<0,0,-.55> } 
 object{przodKabiny}  
-object{dach}       
+object{dach}   
 //----------------------------------------------------------------                                                                                                                        
-//----------------------Tylne zawieszenie---------------------- 
-//---------------------------------------------------------------- 
-box { <-.1,.1,-0.07>,< 1.4, 0.6, -.43>   
+//--------------------------Tyl----------------------------------- 
+//----------------------------------------------------------------
+difference {
+box { <1.595,.3,-0.55>,< 1.6, 0.6, 0.05>   
     
           texture { pigment{kolorZielony}
                     finish { phong 1 reflection{ 0.00 metallic 0.00} } 
                   } // end of texture
     
           scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
-} 
+}  
+box { <1,.3,-0.10>,< 1.7, 0.7, -0.40>   
+    
+          texture { pigment{kolorZielony}
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
+}    
+}
+//----------------------------------------------------------------                                                                                                                        
+//----------------------Tylne zawieszenie---------------------- 
+//---------------------------------------------------------------- 
+difference {
+box { <-.1,.1,-0.07>,< 1.6, 0.6, -.43>   
+    
+          texture { pigment{kolorZielony}
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
+}  
+box { <1,.3,-0.10>,< 1.7, 0.7, -0.40>   
+    
+          texture { pigment{kolorZielony}
+                    finish { phong 1 reflection{ 0.00 metallic 0.00} } 
+                  } // end of texture
+    
+          scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
+}  
+}
 //----------------------------------------------------------------                                                                                                                        
 //----------------------------Tlok-------------------------------- 
 //---------------------------------------------------------------- 
@@ -426,5 +516,5 @@ object{tlok translate<-.1,0,0>}
 //-----------------------Prezentacja------------------------------ 
 //---------------------------------------------------------------- 
 
-//object{lokomotywa rotate y*360*clock}       
-object{lokomotywa translate<0,0,.22>}
+object{lokomotywa rotate y*360*clock}       
+//object{lokomotywa translate<0,0,.22>}
