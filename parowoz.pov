@@ -20,32 +20,32 @@ global_settings{ assumed_gamma 1.0 }
 #include "transforms.inc"
 //--------------------------------------------------------------------------
 // camera ------------------------------------------------------------------
-#declare Camera_0 = camera {/*ultra_wide_angle*/ angle 75      // front view
+#declare Camera_0 = camera {/*ultra_wide_angle*/ angle 75    // przód
                             location  <0 , 1 ,-4>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , -.5>}
-#declare Camera_1 = camera {/*ultra_wide_angle*/ angle 90   // diagonal view
+#declare Camera_1 = camera {/*ultra_wide_angle*/ angle 90    // skos 1
                             location  <2.0 , 2.5 ,-3.0>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
-#declare Camera_2 = camera {/*ultra_wide_angle*/ angle 90 // right side view
-                            location  <3.0 , 1.0 , 0>
+#declare Camera_2 = camera {/*ultra_wide_angle*/ angle 90    // prawo
+                            location  <3.0 , 1.0 , -.5>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
-#declare Camera_3 = camera {/*ultra_wide_angle*/ angle 90        // top view
+#declare Camera_3 = camera {/*ultra_wide_angle*/ angle 90    // góra
                             location  <0 , 3.0 ,-.25>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>} 
-#declare Camera_4 = camera {/*ultra_wide_angle*/ angle 90 // lewo
-                            location  <-3.0 , 2 , 0.0>
+#declare Camera_4 = camera {/*ultra_wide_angle*/ angle 90    // lewo
+                            location  <-4.0 , 1 , -1>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>} 
-#declare Camera_5 = camera {/*ultra_wide_angle*/ angle 75      //tyl
+#declare Camera_5 = camera {/*ultra_wide_angle*/ angle 75    // tyl
                             location  <0.0 , 1.0 ,3.0>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}   
-#declare Camera_6 = camera {/*ultra_wide_angle*/ angle 90   // diagonal view
-                            location  <-1.5 , 1.5 ,-2.5>
+#declare Camera_6 = camera {/*ultra_wide_angle*/ angle 90    // skos 2
+                            location  <-1.5 , 1.5 ,-3>
                             right     x*image_width/image_height
                             look_at   <0.0 , 1.0 , 0.0>}
 camera{Camera_6}
@@ -77,12 +77,15 @@ plane{ <0,1,0>, 0
               } // end of texture
      } // end of plane           
 //--------------------------------------------------------------------------
-//---------------------------- Deklaracje------ ----------------------------
+//---------------------------- Deklaracje-----------------------------------
 //--------------------------------------------------------------------------
 #declare kolorZloty= rgb<204/255,93/255,43/255> ;  
 #declare kolorZielony=rgb<50/255,65/255,42/255>;    
 #declare kolorCzarny=rgb<15/255,10/255,10/255>;  
 #declare kolorRozowy=rgb<205/255,50/255,50/255>;
+
+
+#declare scena=union{
 //--------------------------------------------------------------------------
 //---------------------------- Lokomotywa ----------------------------------
 //--------------------------------------------------------------------------
@@ -91,20 +94,17 @@ plane{ <0,1,0>, 0
 //----------------------------------------------------------------                                                                                                                        
 //---------------------------OSIE---------------------------------
 //----------------------------------------------------------------       
-#declare kolo=union{
-
-difference{object{ Rounded_Tube_AB( <0,0,0>, // Point_A
+#declare kolo=union{ 
+//Obrêcz
+difference{
+object{ Rounded_Tube_AB( <0,0,0>, // Point_A
                          <0,0,-0.05>, // Point_A
                          0.57, // tube radius outside
                          0.45, // tube inner radius 
                          0.02, // border radius 
                          1, // 0 = union, 1 = merge for transparent materials 
                        ) //--------------------------------------------------  
-        texture{ Gold_Metal                              
-               } 
-        scale <1,1,1> 
-        rotate<0,0,0> 
-        translate<0,0,0>                 
+        texture{ Gold_Metal}scale <1,1,1> rotate<0,0,0>translate<0,0,0>                 
       } 
 object{ Rounded_Tube_AB( <0,0,-.02>, // Point_A
                          <0,0,-0.1>, // Point_A
@@ -116,33 +116,26 @@ object{ Rounded_Tube_AB( <0,0,-.02>, // Point_A
         texture{ pigment { Red }
                  finish  { phong 0.5 reflection{ 0.00 metallic 0.00} }                              
                } 
-        scale <1,1,1> 
-        rotate<0,0,0> 
-        translate<0,0,0>                 
+        scale <1,1,1>rotate<0,0,0>translate<0,0,0>                 
       } 
-      }
-    cylinder { <0,0,0>,<0,0,.05>,0.1                                                         //piasta
+}  
+//piasta
+cylinder { <0,0,0>,<0,0,.05>,0.1
                texture {Gold_Metal
-                       } // end of texture
+                       } 
                scale <1,1,1> rotate<0,0,0> translate<0,0,-0.025>
-             } // end of cylinder  ------------------------------------  
-                                                                                                //szprychy
-    #for (i,0, 360, 30)
-            
+             } 
+//szprychy
+#for (i,0, 360, 30)        
     difference{cylinder { <0,0,0>,<0,.5,0>, 0.02 
-    
                texture { pigment { Red }
-                       //normal  { bumps 0.5 scale <0.005,0.25,0.005>}
                          finish  { phong 0.5 reflection{ 0.00 metallic 0.00} } 
-                       } // end of texture
-    
-               scale <1,1,1> rotate<0,0,i> translate<0,0,-0.005>
+                       }
+            scale <1,1,1> rotate<0,0,i> translate<0,0,-0.005>
     }          
-    box{<-1,-1,-0.0235><1,1,-1>
-     texture {Gold_Metal} 
-     }
+    box{<-1,-1,-0.0235><1,1,-1>texture {Gold_Metal} }
     }          
-    #end     
+#end     
 }  
 
 #declare os= union{
@@ -313,7 +306,24 @@ cylinder { <0,0,-.5>,<0,0,.03>,0.02
                    } // end of texture
            scale <1,1,1> rotate<0,135,0> translate<-1.4,0.05,-.6>  
          } // end of cylinder  ------------------------------------ 
+sphere { <0,0,0>, 0.02 
 
+        texture { Gold_Metal 
+                } 
+          scale<1,1,1>  rotate<0,0,0>  translate<-1.4,.3,0> 
+       }
+sphere { <0,0,0>, 0.02 
+
+        texture { Gold_Metal
+                } 
+          scale<1,1,1>  rotate<0,0,0>  translate<-1.4,.3,-.5> 
+       } 
+sphere { <0,0,0>, 0.02 
+
+        texture { Gold_Metal
+                } 
+          scale<1,1,1>  rotate<0,0,0>  translate<-1.75,.05,-.25> 
+       }        
 #for (i,0,4)
 cylinder { <0,.3,-.25*i/5>,<-.35*i/5,.05,.1-.35*i/5>,0.02 
            texture { Gold_Metal
@@ -843,7 +853,7 @@ box { <1,.3,-0.10>,< 1.7, 0.7, -0.40>
           scale <1,1,1> rotate<0,0,0> translate<0,.6,0> 
     } // end of box --------------------------------------
 }  
-#declare dach=box { <.98, .5, -.57>,< 1.65, .52, .07>   
+#declare dach=box { <.98, .5, -.57>,< 2, .52, .07>   
 
       texture { pigment{kolorZielony}  
                 finish { phong 1 reflection{ 0.00 metallic 0.00} } 
@@ -878,22 +888,22 @@ cylinder { <0,0,0>,<.5,0,0>, 0.01
 cylinder { <0,0,0>,<.4,0,0>, 0.01
            texture { Gold_Metal
                    } 
-           scale <1,1,1> rotate<0,0,0> translate<1.1,.75,-.55>
+           scale <1,1,1> rotate<0,0,0> translate<1.1,.745,-.55>
          } 
 cylinder { <0,0,0>,<.4,0,0>, 0.01
            texture { Gold_Metal
                    } 
-           scale <1,1,1> rotate<0,0,0> translate<1.1,.75,.06>
+           scale <1,1,1> rotate<0,0,0> translate<1.1,.745,.06>
          }
 cylinder { <0,0,0>,<.4,0,0>, 0.01
            texture { Gold_Metal
                    } 
-           scale <1,1,1> rotate<0,0,0> translate<1.1,.63,-.55>
+           scale <1,1,1> rotate<0,0,0> translate<1.1,.625,-.55>
          } 
 cylinder { <0,0,0>,<.4,0,0>, 0.01
            texture { Gold_Metal
                    } 
-           scale <1,1,1> rotate<0,0,0> translate<1.1,.63,.06>
+           scale <1,1,1> rotate<0,0,0> translate<1.1,.625,.06>
          }               
 difference{torus { .06,.01
         texture { Gold_Metal
@@ -942,7 +952,7 @@ text { ttf "arial.ttf", "114", 0.02, 0.0 // thickness, offset
 
        scale<1,1.25,1>*0.1
        rotate<0,180,0>
-       translate<1.38,.65,0.067>
+       translate<1.38,.640,0.067>
       } 
 text { ttf "arial.ttf", "114", 0.02, 0.0 // thickness, offset
 
@@ -950,7 +960,7 @@ text { ttf "arial.ttf", "114", 0.02, 0.0 // thickness, offset
               } // end of texture
 
        scale<1,1.25,1>*0.1
-       translate<1.24,.65,-.557>
+       translate<1.24,.640,-.557>
       }
    
 //----------------------------------------------------------------                                                                                                                        
@@ -1160,7 +1170,6 @@ box{<.19,0.04,-.009><.78,.06,-.02>
     finish{phong 1}  
     translate<0,0,0> 
     } 
-    
 } 
 }
 #declare popychacz2=difference{box { <0,0,.0>,< .95, 0.1, -.01>   
@@ -1181,16 +1190,12 @@ box{<.01,0.01,-.008><.19,.09,-.02>
     translate <.75,0,0>
 }
 
-box { <.45,0,.01>,< .75, 0.03, -.02>   
-    
-          texture { Gold_Metal
-                  } 
+box { <.45,0,.01>,< .75, 0.03, -.02>      
+          texture { Gold_Metal} 
           scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
 } 
 box { <.45,0.6,.01>,< .75, 0.07, -.02>   
-    
-          texture { Gold_Metal
-                  } 
+          texture { Gold_Metal } 
           scale <1,1,1> rotate<0,0,0> translate<0,0,0> 
 }
 box{<.19,0.04,-.009><.78,.06,-.02>
@@ -1202,9 +1207,7 @@ box{<.19,0.04,-.009><.78,.06,-.02>
 }
 object{popychacz scale<1.1,1,1> translate<.25,.25,-.55>}
 sphere { <0,0,0>, 0.02 
-
-        texture { Gold_Metal
-                } // end of texture
+        texture { Gold_Metal} 
           scale<1,1,1>  rotate<0,0,0>  translate<1.2,.3,-.57>  
        }  
 object{popychacz rotate<0,180,0> scale<1.1,0,0> translate<1.3,.25,0.05>} 
@@ -1216,21 +1219,17 @@ sphere { <0,0,0>, 0.02
        } 
 object{popychacz2 scale<.8,1,1> rotate<0,0,13> translate<-.30,.08,-.56>}  
 sphere { <0,0,0>, 0.02
-
         texture { Gold_Metal
                 } // end of texture
           scale<1,1,1>  rotate<0,0,0>  translate<.37,.29,-.57>  
        } 
-  
 object{popychacz2 scale<.8,1,1> rotate<0,180,193> translate<-.32,.18,0.06>} 
 sphere { <0,0,0>, 0.02
-
         texture { Gold_Metal}
           scale<1,1,1>  rotate<0,0,0>  translate<.37,.29,.07>  
        }   
 difference{sphere { <0,0,0>, 0.06
         texture { Gold_Metal }
-
        } 
 box{<-1,-1,0>,<1,1,1>
    texture{Gold_Metal}
@@ -1238,17 +1237,15 @@ box{<-1,-1,0>,<1,1,1>
      translate<-.25,0.15,-.6>
  }      
 difference{sphere { <0,0,0>, 0.06
-
-        texture { Gold_Metal
-                } 
-          scale<1,1,1>  rotate<0,0,0>    
+        texture { Gold_Metal}  
        }
 box{<-1,-1,0>,<1,1,1>
    texture{Gold_Metal}
      } 
      rotate<0,180,0> translate<-.25,0.15,.1>
- }      
-//----------------------------------------------------------------                                                                                                                        
+ }           
+
+//----------------------------------------------------------------                                                                                              
 //-----------------------Koooooooniec-----------------------------   
 //---------------------------------------------------------------- 
    
@@ -1257,5 +1254,27 @@ box{<-1,-1,0>,<1,1,1>
 //-----------------------Prezentacja------------------------------ 
 //---------------------------------------------------------------- 
 
-object{lokomotywa rotate y*360*clock}       
-//object{lokomotywa translate<0,0,.22>}
+      
+object{lokomotywa translate<0,.13,0>} 
+
+//----------------------------------------------------------------                                                                                              
+//----------------------------Tor---------------------------------   
+//---------------------------------------------------------------- 
+box{<-10,0,0>,<10,.06,-.03>
+   texture{pigment{Gray}}
+      
+      translate<0,.06,-.515>
+}
+box{<-10,0,0>,<10,.06,-.03>
+   texture{pigment{Gray}}
+      
+      translate<0,.06,.045>
+}
+#for(i,0,100,1)
+box{<0,0,.2>,<.06,.06,-.7>
+   texture{pigment{Brown}}
+     translate<-10+.2*i,0,0>
+}  
+#end      
+}
+object{scena rotate y*360*clock} 
